@@ -4,21 +4,18 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.pubsub.v1.Publisher;
 import com.google.protobuf.ByteString;
 import com.google.pubsub.v1.PubsubMessage;
-import com.google.pubsub.v1.TopicName;
-import com.jjra.chatbackend.configuration.GCPPublisherConfig;
+import com.jjra.chatbackend.configuration.GCPConfig;
 import com.jjra.chatbackend.model.Message;
-import org.apache.juli.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MessageServiceImpl implements MessageService {
 
     @Autowired
-    private GCPPublisherConfig gcpPublisherConfig;
+    private GCPConfig gcpPublisherConfig;
 
     private static final Logger logger = LoggerFactory.getLogger(MessageServiceImpl.class);
 

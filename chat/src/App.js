@@ -14,15 +14,36 @@ function App() {
   useEffect(() => {
   })
 
+  const getMessages = () => {
+    axios.get('http://localhost:8080/api/messages',
+      {
+        headers: { 'Authorization': 'Basic YWRtaW46YWRtaW4=' }
+      })
+      .then(success => {
+        let data = success.data;
+        let messages = data;
+        if (messages.length > 0) {
+          setSubsriptionMessages(messages);
+        }
+      })
+      .catch(error => console.log(error))
+  }
+
   const addMesageToList = () => {
     if (message) {
+      let final_message = {
+        id: "",
+        text: message
+      }
       axios.post('http://localhost:8080/api/message',
+        final_message,
         {
-          "text": message
+          headers: { 'Authorization': 'Basic YWRtaW46YWRtaW4=' }
         })
         .then(success => {
           console.log("message published", success);
-          setMessages(old => [...messages, message]);
+          setMessages(old => [...messages, final_message]);
+          getMessages();
         }
         )
         .catch(error => console.log(error))
@@ -46,7 +67,7 @@ function App() {
           <h4>Flow: Spring Boot Endpoint -> publish to topic</h4>
           <div className='chat-body-left'><MessageList messages={messages} /></div>
           <div className='chat-input'>
-            <input className='chat-text' value={message} type="text" onChange={(e) => setMessage(e.target.value)} />
+            <input className='chat-text' value={message} type="text" onChange={(e) => setMessage( e.target.value)} />
             <button className='chat-button' onClick={addMesageToList}>SEND</button>
           </div>
         </div>

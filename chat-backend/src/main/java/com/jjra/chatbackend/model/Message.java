@@ -8,7 +8,7 @@ public class Message {
     public Message() {}
 
     public Message(String id, String text) {
-        this.id = text;
+        this.id = id;
         this.text = text;
     }
 

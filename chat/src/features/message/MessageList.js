@@ -12,7 +12,6 @@ export default function MessageList({ messages }) {
 
   return (
     <div>
-      {console.log(messagesList)}
       {messagesList.map((m, i) => {
         return <Message index={i} message={m} />
       })}
